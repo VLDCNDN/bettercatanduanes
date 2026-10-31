@@ -20,8 +20,7 @@ export default function Hero() {
           Local information, government services, and public spending in one place.
           {' '}Built by volunteers for the people of Catanduanes.
         </p>
-        <section className="hero-glance" aria-labelledby="glance-title">
-          <h2 id="glance-title">Catanduanes at a glance</h2>
+        <div className="hero-glance">
           <dl className="province-facts">
             {provinceFacts.map(fact => {
               const Icon = factIcons[fact.label];
@@ -43,7 +42,7 @@ export default function Hero() {
               );
             })}
           </dl>
-        </section>
+        </div>
       </div>
     </section>
   );
