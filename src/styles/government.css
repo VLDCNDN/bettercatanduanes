@@ -1,0 +1,29 @@
+.government-page section[id] { scroll-margin-top: calc(var(--sticky-header-height, 100px) + 20px); }
+.government-officials, .government-towns { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; list-style: none; padding: 0; margin: 20px 0 0; }
+.government-official { height: 100%; border: 1px solid var(--rule); border-radius: 4px; overflow: hidden; }
+.government-official img { display: block; width: 100%; height: 260px; object-fit: contain; background: var(--paper-2); }
+.government-official-copy { padding: 20px; }
+.government-official-copy .label { margin: 0 0 10px; }
+.government-page h3 { font-size: 18px; line-height: 1.3; }
+.government-location { display: flex; align-items: center; gap: 6px; font-size: 13px; margin: 12px 0 0; }
+.government-representation { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.government-representation article { border: 1px solid var(--rule); border-radius: 4px; padding: 24px; }
+.government-representation svg { color: var(--accent); }
+.government-representation p:last-child { margin-bottom: 0; color: var(--ink-3); }
+.government-towns a { display: flex; align-items: center; gap: 12px; height: 100%; min-height: 88px; padding: 16px; border: 1px solid var(--rule); border-radius: 4px; text-decoration: none; }
+.government-towns a:hover { background: var(--paper-2); border-color: var(--accent); }
+.government-towns svg { flex-shrink: 0; }
+.government-towns svg:last-child { margin-left: auto; }
+.government-towns span { min-width: 0; }
+.government-towns strong { display: block; font-family: var(--font-hero); color: var(--ink); }
+.government-towns small { display: block; margin-top: 4px; font-size: 12.5px; color: var(--ink-3); }
+.government-sources { border-top: 1px solid var(--rule); padding-top: 28px; }
+.government-sources > p { max-width: 860px; }
+.government-sources .button { gap: 8px; height: auto; min-height: 44px; }
+.government-photo-credits { font-size: 12.5px; color: var(--ink-3); padding-left: 20px; overflow-wrap: anywhere; }
+.government-photo-credits li { margin-bottom: 8px; }
+@media (max-width: 860px) { .government-officials, .government-towns { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) {
+  .government-officials, .government-towns, .government-representation { grid-template-columns: 1fr; }
+  .government-official-copy, .government-representation article { padding: 20px; }
+}

@@ -1,0 +1,383 @@
+.portal-home {
+  --portal-ink: var(--ink);
+  --portal-blue: var(--accent);
+  color: var(--portal-ink);
+  background: white;
+}
+.portal-home h1,
+.portal-home h2,
+.portal-home h3 {
+  color: inherit;
+  margin: 0;
+  font-weight: 600;
+  letter-spacing: -0.035em;
+}
+.portal-home h2 {
+  font-size: clamp(27px, 3.1vw, 42px);
+  line-height: 1.14;
+  margin-bottom: 28px;
+}
+.portal-home h3 {
+  font-size: 19px;
+  line-height: 1.4;
+}
+.portal-home p {
+  margin: 0;
+  line-height: 1.8;
+}
+.portal-home a {
+  text-underline-offset: 4px;
+}
+.portal-home a:hover {
+  text-decoration: underline;
+}
+.portal-hero {
+  --hero-rule: #ffffff40;
+  background: var(--accent-deep);
+  color: white;
+  padding-block: clamp(40px, 5vw, 80px) clamp(32px, 4vw, 56px);
+}
+.portal-home .portal-hero h1 {
+  font-family: var(--font-hero);
+  font-size: clamp(30px, 7.8vw, 112px);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.045em;
+  max-width: 1200px;
+  margin-bottom: 24px;
+  overflow-wrap: normal;
+}
+.portal-hero h1 span {
+  display: block;
+}
+.portal-hero .portal-hero-intro {
+  color: #e2eaff;
+  font-size: 18px;
+  line-height: 1.6;
+  max-width: 68ch;
+  text-align: left;
+}
+.portal-home .portal-section {
+  padding-block: 64px;
+}
+/* The province facts share the hero's alignment and blue surface. */
+.hero-glance {
+  margin-top: 40px;
+  padding-top: 24px;
+  border-top: 1px solid var(--hero-rule);
+}
+.portal-home .hero-glance h2 {
+  margin-bottom: 24px;
+  font-size: 18px;
+}
+.province-facts {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin: 0;
+}
+.province-facts > div {
+  min-width: 0;
+  padding-inline: 28px;
+  border-left: 1px solid var(--hero-rule);
+}
+.province-facts > div:first-child {
+  border: 0;
+  padding-left: 0;
+}
+.province-facts dt {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #e2eaff;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.province-facts .fact-icon {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  stroke-width: 1.75;
+}
+.province-facts dd {
+  margin: 12px 0 8px;
+  font-variant-numeric: tabular-nums;
+}
+.portal-home .province-facts .fact-reference {
+  margin: 0;
+  color: #e2eaff;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.6;
+}
+.hero-glance .fact-reference a {
+  color: inherit;
+  text-decoration: underline;
+}
+.hero-glance .fact-reference a:hover {
+  color: white;
+}
+.hero-glance a:focus-visible {
+  outline-color: white;
+}
+.home-tint {
+  background: var(--paper-2);
+}
+.portal-home .home-history h2 {
+  margin-bottom: 16px;
+}
+.history-intro {
+  max-width: 760px;
+  color: var(--ink-3);
+}
+.history-culture-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  gap: 48px;
+  margin-top: 36px;
+}
+.portal-home .history-culture-grid h3 {
+  font-size: 22px;
+  margin-bottom: 24px;
+}
+.home-history h4 {
+  margin: 0 0 12px;
+  font-size: 19px;
+  line-height: 1.4;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+.history-timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0 20px;
+}
+.history-timeline li {
+  position: relative;
+  border-left: 2px solid var(--rule);
+  padding: 0 0 32px 28px;
+}
+.history-timeline li:last-child {
+  padding-bottom: 0;
+  border-color: transparent;
+}
+.history-timeline li::before {
+  content: '';
+  position: absolute;
+  top: 9px;
+  left: -7px;
+  width: 12px;
+  height: 12px;
+  border: 3px solid var(--portal-blue);
+  border-radius: 50%;
+  background: var(--paper-2);
+}
+.history-timeline time {
+  display: inline-block;
+  margin-bottom: 12px;
+  color: var(--portal-blue);
+  font-size: 24px;
+  line-height: 1.3;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.portal-home .history-source {
+  display: inline-block;
+  margin-top: 16px;
+  color: var(--portal-blue);
+  font-size: 13px;
+  line-height: 1.6;
+  text-decoration: underline;
+  overflow-wrap: anywhere;
+}
+.culture-highlights {
+  display: grid;
+  gap: 20px;
+}
+.culture-card {
+  padding: 24px;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  background: white;
+}
+.culture-card-heading {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.culture-card-heading svg {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  color: var(--portal-blue);
+  stroke-width: 1.75;
+}
+.culture-card-heading h4 {
+  margin: 0;
+}
+.portal-home .culture-metric {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+.culture-metric strong {
+  flex-shrink: 0;
+  color: var(--portal-blue);
+  font-size: 36px;
+  line-height: 1.1;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.culture-metric span {
+  color: var(--ink-3);
+  font-size: 14px;
+}
+.portal-home .home-source {
+  font-size: 13px;
+  color: var(--ink-3);
+}
+.home-source a {
+  color: var(--portal-blue);
+  text-decoration: underline;
+}
+.hotline-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  list-style: none;
+  margin: 0 0 24px;
+  padding: 0;
+}
+.hotline-list li {
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr);
+  gap: 4px 12px;
+  align-content: start;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 16px;
+}
+.hotline-icon {
+  grid-row: span 2;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background: var(--paper-2);
+  color: var(--portal-blue);
+  display: grid;
+  place-items: center;
+}
+.hotline-icon svg {
+  width: 24px;
+  height: 24px;
+  stroke-width: 1.75;
+}
+.portal-home .hotline-office h3 {
+  font-size: 16px;
+  line-height: 1.4;
+}
+.portal-home .hotline-office p {
+  margin: 4px 0 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--ink-3);
+}
+.hotline-number {
+  grid-column: 2;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--portal-blue);
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+}
+@media (max-width: 1100px) {
+  .hotline-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 760px) {
+  .portal-hero {
+    padding-block: 40px;
+  }
+  .portal-home .portal-section {
+    padding-block: 40px;
+  }
+  .hotline-list {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .hero-glance {
+    margin-top: 28px;
+  }
+  .province-facts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px 16px;
+  }
+  .province-facts > div,
+  .province-facts > div:first-child {
+    padding: 0;
+    border: 0;
+  }
+  .province-facts > div:nth-child(n + 3) {
+    padding-top: 20px;
+    border-top: 1px solid var(--hero-rule);
+  }
+  .province-facts dt {
+    flex-direction: column;
+    align-items: flex-start;
+    min-height: 71px;
+    gap: 8px;
+  }
+  .portal-home .portal-hero .portal-hero-intro {
+    font-size: 16px;
+  }
+  .history-culture-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    margin-top: 28px;
+  }
+  .culture-card {
+    padding: 20px;
+  }
+  .portal-home .culture-metric {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+}
+/* Community content uses the same type roles and scale as Transparency. */
+.portal-home { flex: 1; }
+.portal-home h2, .portal-home .map-page-heading h2 { font-family: var(--font-hero); font-size: 20px; font-weight: 700; letter-spacing: -.02em; }
+.portal-home h3, .portal-home .history-culture-grid h3, .portal-home .map-municipality-detail h3 { font-family: var(--font-hero); font-size: 18px; font-weight: 700; letter-spacing: -.02em; }
+.portal-home h4 { font-family: var(--font-hero); font-size: 16px; font-weight: 700; }
+.portal-home p { line-height: 1.55; }
+.portal-home .portal-hero-intro { font-size: clamp(16px, 1.6vw, 22px); line-height: 1.55; }
+.portal-home .portal-section { padding-block: 40px; }
+.portal-home .province-facts dd, .portal-home .culture-metric strong { font-family: var(--font-hero); font-size: 34px; font-weight: 700; }
+.portal-home .home-source, .portal-home .history-source { font-size: 12.5px; }
+.portal-home .history-timeline time { font-family: var(--font-hero); font-size: 24px; }
+.portal-home .culture-card, .portal-home .hotline-list li { border-radius: 4px; }
+.portal-home .map-page { padding-block: 36px 40px; }
+.portal-home .section-label { font-family: var(--font-mono); font-size: 11px; color: var(--accent); letter-spacing: .14em; text-transform: uppercase; margin-bottom: 10px; }
+.portal-home .button { gap: 8px; text-decoration: none; }
+.portal-home .button-blue { background: var(--accent); color: white; }
+.portal-home .button-blue:hover { background: var(--accent-deep); }
+.portal-home #hotlines, .portal-home #map { scroll-margin-top: calc(var(--sticky-header-height, 100px) + 20px); }
+.community-footer { --ink-3: #b8bec9; --rule: #333; --accent: #fff; --accent-deep: #fff; margin-top: auto; border-top: 1px solid var(--rule); background: #000; color: #fff; font-size: 13.5px; }
+.community-footer > .page { padding-block: 28px 32px; }
+.community-footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.2fr; gap: 32px; }
+.community-footer-identity img { max-width: 100%; height: auto; }
+.community-footer-identity p { max-width: 320px; color: var(--ink-3); }
+.community-footer h2 { font-family: var(--font-mono); line-height: 1.5; font-weight: 500; letter-spacing: .14em; }
+.community-footer ul { list-style: none; padding: 0; margin: 14px 0 0; }
+.community-footer li { margin-bottom: 10px; }
+.community-footer a { text-decoration: none; }
+.community-footer a:hover { text-decoration: underline; }
+.community-footer-bottom { display: flex; justify-content: space-between; gap: 20px; border-top: 1px solid var(--rule); margin-top: 28px; padding-top: 20px; color: var(--ink-3); font-size: 12.5px; }
+.community-footer-bottom p { margin: 0; }
+@media (max-width: 860px) { .community-footer-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 560px) { .community-footer-grid { grid-template-columns: 1fr; gap: 24px; } .community-footer-bottom { flex-direction: column; gap: 12px; } }

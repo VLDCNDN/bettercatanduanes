@@ -1,0 +1,25 @@
+.about-page { padding-top: clamp(36px, 5vw, 64px); }
+.about-page h2 { font-size: clamp(23px, 2.5vw, 30px); }
+.about-page p, .about-page li { line-height: 1.8; }
+.about-intro { margin-bottom: 48px; }
+.about-notice {
+  margin: 24px 0 0;
+  padding: 14px 18px;
+  border-left: 3px solid var(--accent);
+  background: var(--accent-soft);
+  color: var(--ink-2);
+}
+.about-section { padding-block: 32px; border-top: 1px solid var(--rule); }
+.about-copy { max-width: 76ch; color: var(--ink-2); }
+.about-copy p { margin: 18px 0 0; }
+.about-role-copy { margin-top: 24px; }
+.about-role + .about-role { margin-top: 28px; }
+.about-role h3 { font-size: 21px; color: var(--ink); }
+.about-role p { margin-top: 12px; }
+.about-links { display: flex; flex-wrap: wrap; gap: 12px 28px; list-style: none; padding: 0; margin: 24px 0 0; }
+.about-links a { display: inline-flex; align-items: center; gap: 5px; }
+.about-take-part .button { margin-top: 24px; }
+.about-page section[id] { scroll-margin-top: calc(var(--sticky-header-height, 140px) + 24px); }
+@media (max-width: 700px) {
+  .about-intro { margin-bottom: 32px; }
+}

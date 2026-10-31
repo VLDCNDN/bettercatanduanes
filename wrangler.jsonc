@@ -1,0 +1,16 @@
+{
+  // Cloudflare Workers, static assets only: no Worker code, no bindings.
+  // `pnpm run deploy:cloudflare` builds and deploys.
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "bettercatanduanes",
+  "compatibility_date": "2026-10-01",
+  "workers_dev": false,
+  "routes": [
+    { "pattern": "bettercatanduanes.org", "custom_domain": true }
+  ],
+  "assets": {
+    "directory": "./dist",
+    // Client-side routes (/districts, /projects/...) serve index.html.
+    "not_found_handling": "single-page-application"
+  }
+}
