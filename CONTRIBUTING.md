@@ -16,8 +16,11 @@ pnpm dev
 5. Open a pull request targeting `develop` and describe the change and validation.
 
 Changes to `develop` and `main` require a pull request, a passing **Lint and build** check,
-and resolved review conversations. Another person's approval is not required;
-maintainers can merge their own pull requests. Force pushes and branch deletion
+and resolved review conversations. Contributors' PRs require approval from
+@VLDCNDN, the code owner for all files. Only @VLDCNDN can bypass the review
+requirement when merging a PR, including their own; CI and PR requirements
+remain enforced. New reviewable commits dismiss existing approvals.
+Force pushes and branch deletion
 are blocked on both branches. `develop` is the default branch for development PRs.
 
 ## Releases
