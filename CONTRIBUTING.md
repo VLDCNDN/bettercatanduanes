@@ -10,15 +10,25 @@ pnpm dev
 ## Pull requests
 
 1. Fork the repository if you do not have write access.
-2. Create a branch from the latest `main`, such as `fix/project-links`.
+2. Create a branch from the latest `develop`, such as `fix/project-links`.
 3. Keep changes focused and preserve the existing MIT license and attribution.
 4. Run `pnpm lint` and `pnpm build`. Check affected pages on desktop and mobile for UI changes.
-5. Open a pull request targeting `main` and describe the change and validation.
+5. Open a pull request targeting `develop` and describe the change and validation.
 
-Changes to `main` require a pull request, a passing **Lint and build** check,
+Changes to `develop` and `main` require a pull request, a passing **Lint and build** check,
 and resolved review conversations. Another person's approval is not required;
 maintainers can merge their own pull requests. Force pushes and branch deletion
-are blocked on `main`.
+are blocked on both branches. `develop` is the default branch for development PRs.
+
+## Releases
+
+When the accumulated changes in `develop` are ready to publish, open a release
+pull request from `develop` into `main`. Merge it after CI passes and the changes
+have been checked. Use **Create a merge commit** for release PRs so the shared
+history between these long-lived branches is preserved; do not delete `develop`.
+
+For urgent production fixes, branch from `main`, open a PR into `main`, then
+merge `main` back into `develop` through a PR so both branches include the fix.
 
 Cloudflare deploys changes merged into `main` to https://bettercatanduanes.org.
 The CI workflow validates pull requests without deployment credentials.
