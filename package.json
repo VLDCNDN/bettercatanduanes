@@ -14,7 +14,9 @@
     "preview": "vite preview",
     "lint": "eslint .",
     "deploy:cloudflare": "npm run build && wrangler deploy",
-    "build:poster": "tsx scripts/build-poster.ts"
+    "build:poster": "tsx scripts/build-poster.ts",
+    "data:sync": "tsx scripts/data-sync.ts",
+    "test:snapshot": "tsx --test scripts/snapshot.test.ts"
   },
   "dependencies": {
     "d3-geo": "^3.1.1",

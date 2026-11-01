@@ -1,3 +1,4 @@
+import { snapshotInfo } from '../api/snapshot';
 import type { ReactNode } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { shortNameOf } from '../config';
@@ -49,7 +50,8 @@ export function Footer() {
       <div className="page footer-inner">
         <p className="footer-source">
           Source: NEP FY 2027 and House Bill 10858 · via the BetterGov.ph Budget API
-          {meta && <> · data built {date(meta.built_at)}</>}
+          {meta && <> · source built {date(meta.built_at)}</>}
+          {<> · Last synced {date(snapshotInfo.syncedAt)}</>}
         </p>
         {meta && <p className="footer-notice">{meta.notice}</p>}
         <ul className="footer-links">

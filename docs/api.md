@@ -1,6 +1,6 @@
 # The API this portal reads
 
-Everything comes from the public, read-only, CORS-open BetterGov.ph Budget API
+The manual `pnpm data:sync` refresh downloads from the public, read-only, CORS-open BetterGov.ph Budget API
 (`https://budget.bettergov.ph/api/v1`), FY 2027 House bill section. Reference:
 <https://budget.bettergov.ph/docs>; OpenAPI: `/api/v1/openapi.json`.
 
@@ -22,6 +22,8 @@ there and `npm run check` fails, since no single place should match that many.
 
 Every response carries `meta` (with `notice`, the source commit and build date) and
 `disclaimers`. The portal prints both as they come.
+
+Visitors read the committed snapshot through this site; they do not execute these requests upstream. `pnpm check` remains an explicitly live diagnostic.
 
 ## Details worth knowing
 

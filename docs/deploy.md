@@ -4,15 +4,10 @@ The build is static: `npm run build` → `dist/`. Every host needs the same sing
 because the routes (`/districts`, `/projects/…`, `/about`) are handled in the browser:
 **a path that is not a file serves `/index.html`**.
 
-Before deploying, run `npm run check`. It exits non-zero if an office name, district id
-or exclusion does not match the API, so it can gate a CI deploy:
-
-```yaml
-# .github/workflows/deploy.yml (excerpt)
-- run: npm ci
-- run: npm run check
-- run: npm run build
-```
+Builds validate and use the committed BetterGov snapshot without contacting the upstream API.
+To publish new data, run `pnpm data:sync`, review and commit `data/bettergov/snapshot.json`,
+then build and deploy normally. Failed refreshes retain the previous snapshot.
+`pnpm check` is an optional live diagnostic, not an ordinary deployment prerequisite.
 
 ## Cloudflare Workers (static assets)
 
@@ -49,6 +44,6 @@ canonical URL into `index.html`, so link previews show the right portal.
 
 ## The API host
 
-The portal reads `https://budget.bettergov.ph` unless `api` is set in the config or
-`VITE_API_BASE` is set at build time. The API is CORS-open and edge-cached, so no proxy
-is needed.
+The refresh script reads `https://budget.bettergov.ph` unless `api` is set in the config or
+`VITE_API_BASE` is set. Use the same setting for refresh and build. Visitors read saved,
+content-hashed JSON from this site. Source links continue to point upstream.

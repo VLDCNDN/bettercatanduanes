@@ -1,3 +1,5 @@
+import { readFileSync } from 'node:fs';
+import { digest, validateArchive, type Snapshot } from './scripts/snapshot';
 import { defineConfig, loadEnv, type Plugin } from 'vite';
 import react from '@vitejs/plugin-react';
 import portal from './portal.config';
@@ -24,11 +26,42 @@ function portalHtml(api: string): Plugin {
   };
 }
 
-export default defineConfig(({ mode }) => {
+export default defineConfig(async ({ mode }) => {
   const env = loadEnv(mode, process.cwd(), 'VITE_');
   const api = (env.VITE_API_BASE || portal.api || DEFAULT_API).replace(/\/+$/, '');
+  let snapshot: Snapshot;
+  try { snapshot = JSON.parse(readFileSync('data/bettergov/snapshot.json', 'utf8')); }
+  catch { throw new Error('Missing BetterGov snapshot. Run pnpm data:sync.'); }
+  await validateArchive(snapshot, api, portal);
+  const assets = new Map<string, string>();
+  const responses: Record<string, string> = {};
+  for (const [url, body] of Object.entries(snapshot.responses)) {
+    const content = JSON.stringify(body);
+    const file = `data/bettergov/${digest(content)}.json`;
+    assets.set(file, content);
+    responses[url] = '/' + file;
+  }
+  const savedData: Plugin = {
+    name: 'bettergov-snapshot',
+    generateBundle() {
+      for (const [fileName, source] of assets) this.emitFile({ type: 'asset', fileName, source });
+    },
+    configureServer(server) {
+      server.middlewares.use((req, res, next) => {
+        const path = (req.url ?? '').split('?')[0].slice(1);
+        const body = assets.get(path);
+        if (body === undefined) {
+          if (path.startsWith('data/bettergov/')) { res.statusCode = 404; res.end(); return; }
+          next(); return;
+        }
+        res.setHeader('Content-Type', 'application/json');
+        res.end(body);
+      });
+    },
+  };
   return {
-    plugins: [react(), portalHtml(api)],
+    define: { __BETTERGOV_SNAPSHOT__: JSON.stringify({ syncedAt: snapshot.syncedAt, responses }) },
+    plugins: [react(), portalHtml(api), savedData],
     server: {
       host: '0.0.0.0',
       // Reserved in ~/projects/ports.md (transparency-portal). strictPort so a

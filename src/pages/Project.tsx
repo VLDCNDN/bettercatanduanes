@@ -47,6 +47,7 @@ export default function Project() {
   return (
     <main id="main-content" tabIndex={-1} className="page main">
       <p className="crumbs"><Link to="/transparency">← Every project</Link></p>
+      {current.status === 'error' && <p><External href={client.href(`/datasets/${dataset}/projects/${encodeURIComponent(id)}`)}>View original API record</External></p>}
       <Await state={current} what="the project">
         {(env) => <ProjectView env={env} />}
       </Await>

@@ -1,0 +1,29 @@
+import assert from 'node:assert/strict';
+import { chromium } from 'playwright-core';
+const base = process.env.SNAPSHOT_TEST_URL || 'http://localhost:5133';
+const browser = await chromium.launch({ channel: 'msedge', headless: true });
+try {
+ const page = await browser.newPage();
+ page.setDefaultTimeout(15000);
+ const upstream = [], errors = [];
+ page.on('pageerror', error => errors.push(error.message));
+ await page.route('https://budget.bettergov.ph/**', route => { upstream.push(route.request().url()); return route.abort(); });
+ await page.goto(base + '/transparency');
+ await page.getByText(/Last synced/).waitFor();
+ await page.waitForFunction(() => document.querySelectorAll('a.project-title').length > 0);
+ const project = await page.locator('a.project-title').first().getAttribute('href');
+ await page.goto(base + '/transparency/about-the-data');
+ await page.getByRole('button', { name: /^Show .*projects/ }).first().click();
+ await page.locator('dialog').waitFor({ state: 'visible' });
+ assert.ok(await page.locator('dialog .query-project').count());
+ await page.keyboard.press('Escape');
+ await page.goto(base + '/transparency/gaa');
+ await page.locator('#gaa-list-h').waitFor();
+ await page.goto(base + project);
+ await page.waitForFunction(() => document.querySelector('.project-h'));
+ await page.goto(base + '/transparency/projects/dpwh/missing-snapshot-id');
+ await page.getByText(/This record is unavailable in the saved data/).waitFor();
+ assert.deepEqual(upstream, []);
+ assert.deepEqual(errors, []);
+ console.log('Browser passed: lists, query dialog, GAA, direct detail, missing detail; zero upstream requests or page errors.');
+} finally { await browser.close(); }
