@@ -1,3 +1,5 @@
+import { loadPreparedGaa } from '../api/snapshot';
+import type { PreparedGaa } from '../api/prepared';
 /**
  * /gaa — the enacted budgets, 2020–2026, for the portal's area:
  * - each DPWH office's whole budget by year, from its district page, with the
@@ -14,7 +16,7 @@ import { Await, Disclaimers, External } from '../components/Bits';
 import { PageHead } from '../components/Chrome';
 import { downloadText } from '../lib/csv';
 import { count, php, phpFull, plural } from '../lib/format';
-import { departmentShort, gaaCsv, gaaYearTotals, hasYear, loadGaa, type GaaResult, type GaaRow } from '../lib/gaa';
+import { departmentShort, gaaCsv, hasYear, type GaaRow } from '../lib/gaa';
 import { usePortal, type Async } from '../lib/portal-context';
 import { useTitle } from '../lib/use-title';
 
@@ -23,25 +25,24 @@ const FIRST = GAA_YEARS[0];
 const LAST = GAA_YEARS[GAA_YEARS.length - 1];
 
 export default function Enacted() {
-  const { config, client, districts } = usePortal();
+  const { config, districts } = usePortal();
   const name = shortNameOf(config);
   useTitle(`Enacted budgets ${FIRST}–${LAST} · ${name}`);
   const places = config.scope.places ?? [];
 
-  const [progress, setProgress] = useState<{ done: number; total: number } | null>(null);
-  const [state, setState] = useState<Async<GaaResult>>({ status: 'loading' });
+  const [state, setState] = useState<Async<PreparedGaa>>({ status: 'loading' });
   const [attempt, setAttempt] = useState(0);
   useEffect(() => {
     if (!places.length) return;
     let live = true;
-    loadGaa(client, config, (done, total) => live && setProgress({ done, total })).then(
+    loadPreparedGaa().then(
       (value) => live && setState({ status: 'ready', value }),
       (error) => live && setState({ status: 'error', error: error instanceof Error ? error : new Error(String(error)) }),
     );
     return () => {
       live = false;
     };
-  }, [client, config, places.length, attempt]);
+  }, [places.length, attempt]);
 
   // #office-… links from the main page land on the office once it has rendered.
   const { hash } = useLocation();
@@ -75,8 +76,7 @@ export default function Enacted() {
         </p>
       ) : state.status === 'loading' ? (
         <div className="state" role="status">
-          <span className="spinner" aria-hidden="true" /> Searching every department’s programs for {placeList}
-          {progress && progress.total > 0 && <> · {count(progress.done)} of {count(progress.total)}</>}…
+          <span className="spinner" aria-hidden="true" /> Loading saved enacted budgets for {placeList}…
         </div>
       ) : state.status === 'error' ? (
         <div className="state state-error" role="alert">
@@ -186,10 +186,10 @@ function OfficeHistory({ office }: { office: DistrictOffice }) {
 // Programs and projects that name the place
 // ---------------------------------------------------------------------------
 
-function Programs({ result, placeList }: { result: GaaResult; placeList: string }) {
+function Programs({ result, placeList }: { result: PreparedGaa; placeList: string }) {
   const { config } = usePortal();
   const all = result.rows;
-  const totals = useMemo(() => gaaYearTotals(all), [all]);
+  const totals = result.yearTotals;
   const maxTotal = Math.max(1, ...totals.map((t) => t.amount));
 
   const [params, setParams] = useSearchParams();

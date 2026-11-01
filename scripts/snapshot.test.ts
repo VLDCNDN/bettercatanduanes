@@ -69,3 +69,48 @@ test('failed refresh exits nonzero and preserves the last successful snapshot by
   assert.match(child.stderr, /Non-retryable HTTP 400/);
   assert.deepEqual(readFileSync('data/bettergov/snapshot.json'), before);
 });
+
+import { prepareSnapshot } from './snapshot';
+import { summarise } from '../src/lib/scope';
+import { gaaYearTotals } from '../src/lib/gaa';
+test('prepared bundles preserve query evidence, exclusions, ordering and totals without network access', async () => {
+  const saved: Snapshot = JSON.parse(readFileSync('data/bettergov/snapshot.json', 'utf8'));
+  const original = globalThis.fetch;
+  globalThis.fetch = async () => { throw new Error('Unexpected network access'); };
+  try {
+    const raw = await validateArchive(saved, saved.base, config);
+    const prepared = await prepareSnapshot(saved, saved.base, config);
+    assert.deepEqual(prepared.portal.scope.projects, raw.scope.projects);
+    assert.deepEqual(prepared.portal.scope.queries, raw.scope.queries);
+    assert.deepEqual(prepared.portal.scope.excluded, raw.scope.excluded);
+    assert.deepEqual(prepared.portal.scope.summary, summarise(raw.scope.projects));
+    assert.deepEqual(prepared.gaa.rows, raw.gaa.rows);
+    assert.deepEqual(prepared.gaa.queries, raw.gaa.queries);
+    assert.deepEqual(prepared.gaa.excluded, raw.gaa.excluded);
+    assert.deepEqual(prepared.gaa.yearTotals, gaaYearTotals(raw.gaa.rows));
+    assert.ok(prepared.portal.districts.length > 0);
+    assert.equal(prepared.portal.overview.meta.source_commit, raw.scope.meta.source_commit);
+    const roundTrip = JSON.parse(JSON.stringify(prepared));
+    assert.deepEqual(roundTrip.portal.scope.summary, prepared.portal.scope.summary);
+    assert.deepEqual(roundTrip.gaa.yearTotals, prepared.gaa.yearTotals);
+  } finally { globalThis.fetch = original; }
+});
+
+test('prepared results retain manual exclusions and rejected-query evidence', async () => {
+  const saved: Snapshot = JSON.parse(readFileSync('data/bettergov/snapshot.json', 'utf8'));
+  const original = await prepareSnapshot(saved, saved.base, config);
+  const project = original.portal.scope.projects[0];
+  const program = original.gaa.rows[0];
+  const changed = { ...config, scope: { ...config.scope, exclude: [
+    { key: project.key, reason: 'Fixture project exclusion' },
+    { key: program.key, reason: 'Fixture GAA exclusion' },
+  ] } };
+  const prepared = await prepareSnapshot({ ...saved, scope: fingerprint(changed) }, saved.base, changed);
+  assert.equal(prepared.portal.scope.projects.length, original.portal.scope.projects.length - 1);
+  assert.equal(prepared.portal.scope.excluded[0].project?.key, project.key);
+  assert.equal(prepared.gaa.rows.length, original.gaa.rows.length - 1);
+  assert.equal(prepared.gaa.excluded[0].row?.key, program.key);
+  assert.deepEqual(prepared.portal.scope.queries, original.portal.scope.queries);
+  assert.deepEqual(prepared.portal.scope.summary, summarise(prepared.portal.scope.projects));
+  assert.deepEqual(prepared.gaa.yearTotals, gaaYearTotals(prepared.gaa.rows));
+});

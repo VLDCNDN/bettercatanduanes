@@ -2,7 +2,7 @@ import { createContext, useContext } from 'react';
 import type { PortalConfig } from '../config';
 import type { Client } from '../api/client';
 import type { DistrictCard, Envelope, Overview } from '../api/types';
-import type { ScopeResult } from './scope';
+import type { PreparedScope } from '../api/prepared';
 
 export type Async<T> =
   | { status: 'loading' }
@@ -13,7 +13,7 @@ export interface PortalState {
   config: PortalConfig;
   client: Client;
   overview: Async<Envelope<Overview>>;
-  scope: Async<ScopeResult>;
+  scope: Async<PreparedScope>;
   districts: Async<Envelope<DistrictCard>[]>;
   retry(): void;
 }

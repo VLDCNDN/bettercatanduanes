@@ -1,5 +1,5 @@
 import { readFileSync } from 'node:fs';
-import { digest, validateArchive, type Snapshot } from './scripts/snapshot';
+import { digest, prepareSnapshot, type Snapshot } from './scripts/snapshot';
 import { defineConfig, loadEnv, type Plugin } from 'vite';
 import react from '@vitejs/plugin-react';
 import portal from './portal.config';
@@ -32,7 +32,7 @@ export default defineConfig(async ({ mode }) => {
   let snapshot: Snapshot;
   try { snapshot = JSON.parse(readFileSync('data/bettergov/snapshot.json', 'utf8')); }
   catch { throw new Error('Missing BetterGov snapshot. Run pnpm data:sync.'); }
-  await validateArchive(snapshot, api, portal);
+  const prepared = await prepareSnapshot(snapshot, api, portal);
   const assets = new Map<string, string>();
   const responses: Record<string, string> = {};
   for (const [url, body] of Object.entries(snapshot.responses)) {
@@ -40,6 +40,13 @@ export default defineConfig(async ({ mode }) => {
     const file = `data/bettergov/${digest(content)}.json`;
     assets.set(file, content);
     responses[url] = '/' + file;
+  }
+  const preparedFiles: Record<string, string> = {};
+  for (const [key, body] of Object.entries(prepared)) {
+    const content = JSON.stringify(body);
+    const file = `data/bettergov/${digest(content)}.json`;
+    assets.set(file, content);
+    preparedFiles[key] = '/' + file;
   }
   const savedData: Plugin = {
     name: 'bettergov-snapshot',
@@ -60,7 +67,7 @@ export default defineConfig(async ({ mode }) => {
     },
   };
   return {
-    define: { __BETTERGOV_SNAPSHOT__: JSON.stringify({ syncedAt: snapshot.syncedAt, responses }) },
+    define: { __BETTERGOV_SNAPSHOT__: JSON.stringify({ syncedAt: snapshot.syncedAt, responses, prepared: preparedFiles }) },
     plugins: [react(), portalHtml(api), savedData],
     server: {
       host: '0.0.0.0',

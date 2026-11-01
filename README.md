@@ -26,7 +26,7 @@ pnpm build
 
 Review the changes to `data/bettergov/snapshot.json`, commit the update, and deploy normally to publish it. Running the refresh locally does not update the public site. There is no automatic expiry or browser fallback to BetterGov.
 
-Builds validate the snapshot against the configured scope and API host, then emit content-hashed JSON files loaded from this site's own origin. Project details load separately. Missing or incompatible snapshots fail with instructions to run `pnpm data:sync`. The footer distinguishes the last sync from the upstream source build date.
+Builds validate the snapshot against the configured scope and API host, then prepare the merged project list, query evidence, exclusions, district cards, overview, project totals, and GAA results/yearly totals as two content-hashed JSON bundles. Visitors load one bundle for the main Transparency page and a second when viewing GAA or its query notes. Matching, deduplication and baseline totals run during the build. Interactive filters still run locally. Individual project details load separately from this site's own origin. Missing or incompatible snapshots fail with instructions to run `pnpm data:sync`. The footer distinguishes the last sync from the upstream source build date.
 
 `pnpm check` is an optional **live** API diagnostic. Run it deliberately; ordinary builds do not invoke it. `pnpm setup` also contacts BetterGov and changes portal configuration, after which a new snapshot is required. `VITE_API_BASE` or the config's `api` setting selects the upstream host; synchronize and build with matching settings.
 

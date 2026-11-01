@@ -1,6 +1,7 @@
+import type { PreparedPortal, PreparedGaa } from '../src/api/prepared';
 import { createClient } from '../src/api/client';
-import { resolveScope } from '../src/lib/scope';
-import { resolveGaa } from '../src/lib/gaa';
+import { summarise, resolveScope } from '../src/lib/scope';
+import { gaaYearTotals, resolveGaa } from '../src/lib/gaa';
 import { createHash } from 'node:crypto';
 import type { PortalConfig } from '../src/config';
 
@@ -27,7 +28,7 @@ export async function validateArchive(snapshot: Snapshot, base: string, config: 
     if (!(url in snapshot.responses)) throw new Error(`Incomplete snapshot: ${url}. Run pnpm data:sync.`);
     return snapshot.responses[url];
   });
-  await client.overview();
+  const overview = await client.overview();
   const scope = await resolveScope(client, config);
   const gaa = await resolveGaa(client, config);
   if (scope.queries.some((q) => q.truncated || q.rows.length !== q.total || (q.kind === 'office' && !q.total)) ||
@@ -36,10 +37,19 @@ export async function validateArchive(snapshot: Snapshot, base: string, config: 
   const districts = new Set(config.scope.districts ?? []);
   const projects = new Map(scope.queries.flatMap((q) => q.rows.map((p) => [`${p.dataset}:${p.id}`, p] as const)));
   for (const q of scope.queries) for (const office of q.officeLens?.offices ?? []) for (const d of office.districts) districts.add(d.id);
-  for (const id of districts) await client.district(id);
+  const cards = await Promise.all([...districts].map((id) => client.district(id)));
   for (const p of projects.values()) {
     const detail = await client.project(p.dataset, p.id);
     if (detail.data.id !== p.id || detail.data.dataset !== p.dataset || !detail.data.labels) throw new Error(`Invalid project detail: ${p.id}`);
   }
-  return { scope, gaa };
+  return { scope, gaa, overview, districts: cards };
+}
+
+/** Generate display-ready results from the validated archive, entirely offline. */
+export async function prepareSnapshot(snapshot: Snapshot, base: string, config: PortalConfig): Promise<{ portal: PreparedPortal; gaa: PreparedGaa }> {
+  const { overview, scope, districts, gaa } = await validateArchive(snapshot, base, config);
+  return {
+    portal: { overview, districts, scope: { ...scope, summary: summarise(scope.projects) } },
+    gaa: { ...gaa, yearTotals: gaaYearTotals(gaa.rows) },
+  };
 }

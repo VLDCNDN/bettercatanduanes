@@ -1,3 +1,4 @@
+import { loadPreparedGaa } from '../api/snapshot';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import type { Disclaimer, Overview } from '../api/types';
@@ -9,7 +10,7 @@ import { count, date, plural } from '../lib/format';
 import { SOURCE_CODE_URL } from '../lib/links';
 import { usePortal } from '../lib/portal-context';
 import type { QueryReport, ScopeResult } from '../lib/scope';
-import { departmentShort, loadGaa, type GaaResult } from '../lib/gaa';
+import { departmentShort, type GaaResult } from '../lib/gaa';
 import type { Async } from '../lib/portal-context';
 import { useTitle } from '../lib/use-title';
 
@@ -172,20 +173,20 @@ function AboutView({ scope, overview }: { scope: ScopeResult; overview: Overview
 
 /** The 2020–2026 searches, published like the 2027 ones: every department with a match, and how to check it. */
 function GaaQuestions() {
-  const { client, config } = usePortal();
+  const { config } = usePortal();
   const places = config.scope.places ?? [];
   const [state, setState] = useState<Async<GaaResult>>({ status: 'loading' });
   useEffect(() => {
     if (!places.length) return;
     let live = true;
-    loadGaa(client, config).then(
+    loadPreparedGaa().then(
       (value) => live && setState({ status: 'ready', value }),
       (error) => live && setState({ status: 'error', error: error instanceof Error ? error : new Error(String(error)) }),
     );
     return () => {
       live = false;
     };
-  }, [client, config, places.length]);
+  }, [places.length]);
 
   return (
     <section className="section" aria-labelledby="g-h">

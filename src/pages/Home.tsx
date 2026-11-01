@@ -1,3 +1,4 @@
+import type { PreparedScope } from '../api/prepared';
 import { useEffect, useMemo, useState } from 'react';
 import { Link, useLocation, useSearchParams } from 'react-router-dom';
 import type { BridgeGroup, DatasetInfo, Disclaimer, GroupInfo } from '../api/types';
@@ -9,7 +10,7 @@ import OfficesSection from '../components/OfficesSection';
 import { projectsCsv, downloadText } from '../lib/csv';
 import { count, php, phpDelta, plural } from '../lib/format';
 import { usePortal } from '../lib/portal-context';
-import { summarise, type ScopedProject, type ScopeResult, type Summary } from '../lib/scope';
+import { summarise, type ScopedProject, type Summary } from '../lib/scope';
 import { useTitle } from '../lib/use-title';
 
 const PAGE = 100;
@@ -47,7 +48,7 @@ function groupInfo(datasets: DatasetInfo[], rows: ScopedProject[]): Record<Bridg
   return out;
 }
 
-function Projects({ scope, datasets }: { scope: ScopeResult; datasets: DatasetInfo[] }) {
+function Projects({ scope, datasets }: { scope: PreparedScope; datasets: DatasetInfo[] }) {
   const { config, districts } = usePortal();
   const { hash } = useLocation();
 
@@ -65,7 +66,7 @@ function Projects({ scope, datasets }: { scope: ScopeResult; datasets: DatasetIn
   }, [scope.disclaimers, districts]);
   const name = shortNameOf(config);
   const all = scope.projects;
-  const summary = useMemo(() => summarise(all), [all]);
+  const summary = scope.summary;
   const groups = useMemo(() => groupInfo(datasets, all), [datasets, all]);
   const programName = (k: DatasetKey) => datasets.find((d) => d.key === k)?.short ?? k.toUpperCase();
 
@@ -114,7 +115,7 @@ function Projects({ scope, datasets }: { scope: ScopeResult; datasets: DatasetIn
     });
     return rows.sort((a, b) => SORTS[sort].cmp(a, b) || a.title.localeCompare(b.title));
   }, [all, q, program, status, why, office, sort]);
-  const filteredSummary = useMemo(() => summarise(filtered), [filtered]);
+  const filteredSummary = useMemo(() => filtered.length === all.length ? summary : summarise(filtered), [filtered, all.length, summary]);
   const narrowed = filtered.length !== all.length;
 
   return (

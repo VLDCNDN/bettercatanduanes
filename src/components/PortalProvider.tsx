@@ -1,10 +1,9 @@
 import { useEffect, useMemo, useState, type ReactNode } from 'react';
 import portalConfig from '../../portal.config';
 import { createClient } from '../api/client';
-import { snapshotTransport } from '../api/snapshot';
+import { loadPreparedPortal, snapshotTransport } from '../api/snapshot';
 import { DEFAULT_API } from '../config';
 import { PortalContext, type Async, type PortalState } from '../lib/portal-context';
-import { resolveScope, type ScopeResult } from '../lib/scope';
 
 const toError = (e: unknown) => (e instanceof Error ? e : new Error(String(e)));
 
@@ -24,17 +23,6 @@ function useSettled<T>(promise: Promise<T>): Async<T> {
   return state?.promise === promise ? state.value : { status: 'loading' };
 }
 
-/**
- * The districts to show: every district an in-scope DPWH office serves (so an
- * office is always shown with all of its districts), plus any the config names
- * (a place-only portal, such as a municipality, names its own).
- */
-function districtIds(scope: ScopeResult, configured: string[]): string[] {
-  const ids = new Set(configured);
-  for (const q of scope.queries) for (const o of q.officeLens?.offices ?? []) for (const d of o.districts) ids.add(d.id);
-  return [...ids];
-}
-
 export default function PortalProvider({ children }: { children: ReactNode }) {
   const config = portalConfig;
   const client = useMemo(() => createClient(import.meta.env.VITE_API_BASE || config.api || DEFAULT_API, snapshotTransport), [config.api]);
@@ -42,14 +30,14 @@ export default function PortalProvider({ children }: { children: ReactNode }) {
 
   // One set of requests per attempt; "Try again" makes a new set (failed requests are not cached).
   const loads = useMemo(() => {
-    const scope = resolveScope(client, config);
+    const prepared = loadPreparedPortal();
     return {
       attempt,
-      overview: client.overview(),
-      scope,
-      districts: scope.then((s) => Promise.all(districtIds(s, config.scope.districts ?? []).map((id) => client.district(id)))),
+      overview: prepared.then((p) => p.overview),
+      scope: prepared.then((p) => p.scope),
+      districts: prepared.then((p) => p.districts),
     };
-  }, [client, config, attempt]);
+  }, [attempt]);
 
   const overview = useSettled(loads.overview);
   const scope = useSettled(loads.scope);
