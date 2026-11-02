@@ -372,6 +372,8 @@
 .community-footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.2fr; gap: 32px; }
 .community-footer-identity img { max-width: 100%; height: auto; }
 .community-footer-identity p { max-width: 320px; color: var(--ink-3); }
+.community-footer-socials { display: flex; align-items: center; gap: 16px; }
+.community-footer-socials a { display: inline-flex; }
 .community-footer h2 { font-family: var(--font-mono); line-height: 1.5; font-weight: 500; letter-spacing: .14em; }
 .community-footer ul { list-style: none; padding: 0; margin: 14px 0 0; }
 .community-footer li { margin-bottom: 10px; }
