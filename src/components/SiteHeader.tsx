@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import horizontalLogo from '../../branding/horizontal/horizontal-blue.svg';
 const navigation = [
   { label: 'Home', href: '/' },
+  { label: 'Services', href: '/services' },
   { label: 'Transparency', href: '/transparency' },
   { label: 'Government', href: '/government' },
   { label: 'About', href: '/about' },

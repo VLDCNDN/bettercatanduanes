@@ -13,6 +13,9 @@ import Home from './pages/Home';
 import Project from './pages/Project';
 import Enacted from './pages/Enacted';
 import Government from './pages/Government';
+import Services from './pages/Services';
+import ServiceDetail from './pages/ServiceDetail';
+import './styles/services.css';
 
 function CommunityLayout() {
   return <><Outlet /><CommunityFooter /></>;
@@ -62,6 +65,8 @@ export default function App() {
       <Route element={<CommunityLayout />}>
       <Route path="/" element={<CommunityHome />} />
       <Route path="/government" element={<Government />} />
+      <Route path="/services" element={<Services />} />
+      <Route path="/services/:id" element={<ServiceDetail />} />
       <Route path="/about" element={<CommunityAbout />} />
       </Route>
       <Route path="/transparency" element={<TransparencyLayout />}>

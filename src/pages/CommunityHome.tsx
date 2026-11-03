@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useTitle } from '../lib/use-title';
 import {
   Siren,
@@ -9,6 +9,7 @@ import {
   HeartPulse,
   Shield,
   CloudSun,
+  ArrowRight,
   type LucideIcon,
 } from 'lucide-react';
 import Hero from '../components/community/Hero';
@@ -40,6 +41,12 @@ export default function CommunityHome() {
   return (
     <main id="main-content" tabIndex={-1} className="home-page portal-home" lang="en">
       <Hero />
+      <section className="page" aria-labelledby="home-services-title">
+        <div className="home-services-link">
+          <div><h2 id="home-services-title">Find a public service</h2><p>Browse provincial guides and office contacts, with links to their official sources.</p></div>
+          <Link to="/services">Explore services <ArrowRight size={18} aria-hidden="true" /></Link>
+        </div>
+      </section>
       <MunicipalityExplorer />
       <HistoryCulture />
       <section
