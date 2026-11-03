@@ -3,7 +3,7 @@ import { ExternalLink } from 'lucide-react';
 import logo from '../../branding/horizontal/horizontal-white.svg';
 
 const sections = [
-  { title: 'Explore', links: [['Home', '/'], ['Transparency', '/transparency'], ['Government', '/government'], ['About', '/about']] },
+  { title: 'Explore', links: [['Home', '/'], ['Services', '/services'], ['Transparency', '/transparency'], ['Government', '/government'], ['About', '/about']] },
   { title: 'The project', links: [['About this project', '/about'], ['Hotlines', '/#hotlines']] },
   { title: 'Official sources', links: [['Provincial government', 'https://provinceofcatanduanes.gov.ph/'], ['Provincial office directory', 'https://provinceofcatanduanes.gov.ph/department-heads/'], ['BetterGov.ph', 'https://bettergov.ph/'], ['BetterLGU community', 'https://lgu.bettergov.ph/']] },
 ];

@@ -1,0 +1,435 @@
+[
+  {
+    "kind": "office",
+    "id": "governor",
+    "title": "Governor's Office",
+    "categoryIds": [],
+    "page": 1,
+    "phone": "+63 969 520 8335",
+    "email": "catanduanesgovernorsoffice@gmail.com",
+    "note": "The website footer shows a different phone number and a mismatched call link. Confirm the correct office number using the official directory.",
+    "noteSource": {
+      "url": "https://provinceofcatanduanes.gov.ph/",
+      "label": "Homepage contact listing"
+    }
+  },
+  {
+    "kind": "office",
+    "id": "governor-information",
+    "title": "Governor's Office – Information Unit",
+    "categoryIds": [],
+    "page": 1,
+    "phone": "+63 927 154 5124",
+    "email": "catanduanesinfo@gmail.com"
+  },
+  {
+    "kind": "office",
+    "id": "governor-it",
+    "title": "Governor's Office – Information Technology Department",
+    "categoryIds": [],
+    "page": 1,
+    "phone": "052-7408-347",
+    "email": "governorsofficeitdepartment@gmail.com"
+  },
+  {
+    "kind": "office",
+    "id": "governor-ledipo",
+    "title": "Governor's Office – LEDIPO",
+    "categoryIds": [
+      "business"
+    ],
+    "page": 1,
+    "phone": "+63 917 517 3664",
+    "email": "ledipo.catanduanes@gmail.com"
+  },
+  {
+    "kind": "office",
+    "id": "provincial-nutrition",
+    "title": "Governor's Office – Nutrition Office",
+    "categoryIds": [
+      "health"
+    ],
+    "page": 1,
+    "phone": "+63 919 286 9077",
+    "email": "MMCurativo18@gmail.com"
+  },
+  {
+    "kind": "office",
+    "id": "provincial-popcom",
+    "title": "Governor's Office – POPCOM",
+    "categoryIds": [
+      "health"
+    ],
+    "page": 1,
+    "phone": "+63 946 488 5182",
+    "email": "catanduanespopulation@gmail.com"
+  },
+  {
+    "kind": "office",
+    "id": "vice-governor",
+    "title": "Office of the Vice Governor",
+    "categoryIds": [],
+    "page": 1,
+    "phone": "+63 921 649 5929",
+    "email": "obetfernandez@gmail.com"
+  },
+  {
+    "kind": "office",
+    "id": "provincial-accounting",
+    "title": "Provincial Accounting Office",
+    "categoryIds": [],
+    "page": 1,
+    "email": "provacctng2020@gmail.com"
+  },
+  {
+    "kind": "office",
+    "id": "provincial-administrator",
+    "title": "Provincial Administrator's Office",
+    "categoryIds": [],
+    "page": 1,
+    "email": "paoffice02032025@gmail.com"
+  },
+  {
+    "kind": "office",
+    "id": "provincial-agricultural-engineering",
+    "title": "Provincial Agricultural and Biosystems Engineering Office",
+    "categoryIds": [
+      "agriculture"
+    ],
+    "page": 1,
+    "phone": "+63 975 563 4624",
+    "email": "pabeo.catanduanes052025@gmail.com"
+  },
+  {
+    "kind": "office",
+    "id": "provincial-agriculture",
+    "title": "Provincial Agricultural Services Office",
+    "categoryIds": [
+      "agriculture"
+    ],
+    "page": 1,
+    "phone": "+63 907 120 2619",
+    "email": "opag2_catanduanesyahoo.com",
+    "note": "The published email has no @ symbol. Confirm the email with the office; it has not been corrected here."
+  },
+  {
+    "kind": "office",
+    "id": "provincial-assessor",
+    "title": "Provincial Assessor's Office",
+    "categoryIds": [
+      "property-tax"
+    ],
+    "page": 1,
+    "phone": "052-741-396",
+    "email": "catpasso.catanduanes@gmail.com",
+    "note": "The published phone number appears incomplete. Confirm it in the official directory before use."
+  },
+  {
+    "kind": "office",
+    "id": "provincial-budget",
+    "title": "Provincial Budget and Management Office",
+    "categoryIds": [],
+    "page": 1,
+    "phone": "+63 970 322 1553",
+    "email": "pbmocatanduanes@gmail.com"
+  },
+  {
+    "kind": "office",
+    "id": "provincial-cooperatives",
+    "title": "Provincial Cooperative Development Office",
+    "categoryIds": [
+      "business",
+      "agriculture"
+    ],
+    "page": 1,
+    "phone": "+63 907 877 1639"
+  },
+  {
+    "kind": "office",
+    "id": "provincial-pdrrmo",
+    "title": "Provincial Disaster Risk Reduction and Management Office",
+    "categoryIds": [
+      "emergency"
+    ],
+    "page": 1,
+    "phone": "+63 951 552 1898",
+    "email": "prddrmocatanduanes22@gmail.com",
+    "note": "The homepage lists a different PDRRMO hotline, 0912-670-7777. Confirm the purpose and availability of each number through the official sources. This directory number is not a verified dispatch line.",
+    "noteSource": {
+      "url": "https://provinceofcatanduanes.gov.ph/",
+      "label": "Homepage contact listing"
+    }
+  },
+  {
+    "kind": "office",
+    "id": "provincial-engineering-admin",
+    "title": "Provincial Engineer's Office – Administrative",
+    "categoryIds": [
+      "property-tax"
+    ],
+    "page": 2
+  },
+  {
+    "kind": "office",
+    "id": "provincial-engineering-maintenance",
+    "title": "Provincial Engineering's Office Maintenance",
+    "categoryIds": [
+      "property-tax"
+    ],
+    "page": 2
+  },
+  {
+    "kind": "office",
+    "id": "provincial-enro",
+    "title": "Provincial Environment & Natural Resources Office",
+    "categoryIds": [
+      "property-tax"
+    ],
+    "page": 2,
+    "phone": "+63 946 049 9077",
+    "email": "enrocat05@gmail.com"
+  },
+  {
+    "kind": "office",
+    "id": "provincial-equipment",
+    "title": "Provincial Equipment Pool Office",
+    "categoryIds": [
+      "property-tax"
+    ],
+    "page": 2,
+    "phone": "+63 919 213 0092",
+    "email": "pepo.catanduanes@gmail.com"
+  },
+  {
+    "kind": "office",
+    "id": "provincial-general-services",
+    "title": "Provincial General Services Office",
+    "categoryIds": [],
+    "page": 2,
+    "phone": "+63 947 303 8354",
+    "note": "The same phone number is also listed for the Provincial Health Office. Confirm the appropriate contact."
+  },
+  {
+    "kind": "office",
+    "id": "provincial-health",
+    "title": "Provincial Health Office",
+    "categoryIds": [
+      "health"
+    ],
+    "page": 2,
+    "phone": "+63 947 303 8354",
+    "note": "The same phone number is also listed for General Services. Confirm the appropriate health-office contact. This is not a verified emergency-room line."
+  },
+  {
+    "kind": "office",
+    "id": "provincial-hr",
+    "title": "Provincial Human Resource Management & Development Office",
+    "categoryIds": [],
+    "page": 2,
+    "email": "go_hrmdd@yahoo.com"
+  },
+  {
+    "kind": "office",
+    "id": "provincial-audit",
+    "title": "Provincial Internal Audit Services Office",
+    "categoryIds": [],
+    "page": 2,
+    "phone": "+63 966 551 2726",
+    "email": "jezzielaine@gmail.com"
+  },
+  {
+    "kind": "office",
+    "id": "provincial-legal",
+    "title": "Provincial Legal Office",
+    "categoryIds": [],
+    "page": 2,
+    "email": "catanduanespio@gmail.com"
+  },
+  {
+    "kind": "office",
+    "id": "provincial-pwd",
+    "title": "Provincial Persons with Disability Affairs Office",
+    "categoryIds": [
+      "social-assistance"
+    ],
+    "page": 2,
+    "phone": "+63 946 832 2486",
+    "email": "Catanduanes.pdao@gmail.com",
+    "aliases": "PDAO PWD disability"
+  },
+  {
+    "kind": "office",
+    "id": "provincial-planning",
+    "title": "Provincial Planning and Development Office",
+    "categoryIds": [
+      "property-tax"
+    ],
+    "page": 2,
+    "phone": "+63 946 752 9441",
+    "email": "ebreyes64@gmail.com"
+  },
+  {
+    "kind": "office",
+    "id": "provincial-peso",
+    "title": "Provincial Public Employment Services Office",
+    "categoryIds": [
+      "education-employment"
+    ],
+    "page": 2,
+    "phone": "+63 927 154 5124",
+    "email": "pesocatanduanes14@gmail.com",
+    "aliases": "PESO jobs employment referral"
+  },
+  {
+    "kind": "office",
+    "id": "provincial-social-welfare",
+    "title": "Provincial Social Welfare and Development Office",
+    "categoryIds": [
+      "social-assistance"
+    ],
+    "page": 2,
+    "phone": "+63 921 304 1939",
+    "email": "catanduanes.pswdo@gmail.com",
+    "aliases": "PSWDO assistance social welfare"
+  },
+  {
+    "kind": "office",
+    "id": "provincial-tourism",
+    "title": "Provincial Tourism Office",
+    "categoryIds": [],
+    "page": 2,
+    "phone": "+63 919 999 087",
+    "email": "itsmorefuncatanduanes@gmail.com",
+    "note": "The published phone number appears incomplete. Confirm it with the office."
+  },
+  {
+    "kind": "office",
+    "id": "provincial-treasurer",
+    "title": "Provincial Treasurer's Office",
+    "categoryIds": [
+      "business",
+      "property-tax"
+    ],
+    "page": 2,
+    "phone": "+63 908 767 7903",
+    "email": "PTOCATANDUANES@gmail.com"
+  },
+  {
+    "kind": "office",
+    "id": "provincial-veterinary",
+    "title": "Provincial Veterinary Office",
+    "categoryIds": [
+      "agriculture"
+    ],
+    "page": 3,
+    "phone": "+63 907 000 1041",
+    "email": "pvetcat@gmail.com"
+  },
+  {
+    "kind": "office",
+    "id": "provincial-youth",
+    "title": "Provincial Youth and Development Office",
+    "categoryIds": [
+      "education-employment"
+    ],
+    "page": 3,
+    "phone": "+63 963 656 2267",
+    "email": "pydocatanduanes@gmail.com"
+  },
+  {
+    "kind": "office",
+    "id": "sp-legislative",
+    "title": "Sangguniang Panlalawigan – Legislative Services",
+    "categoryIds": [],
+    "page": 3,
+    "phone": "+63 921 649 5929",
+    "email": "obetfernandez@gmail.com"
+  },
+  {
+    "kind": "office",
+    "id": "sp-support",
+    "title": "Sangguniang Panlalawigan – Support Services",
+    "categoryIds": [],
+    "page": 3,
+    "phone": "+63 977 804 6125",
+    "email": "spcatanduanes@gmail.com"
+  },
+  {
+    "kind": "office",
+    "id": "bato-hospital",
+    "title": "Bato Maternity and Children's Hospital",
+    "categoryIds": [
+      "health"
+    ],
+    "page": 3,
+    "phone": "+63 950 393 1098",
+    "email": "bmch1956@yahoo.com.ph"
+  },
+  {
+    "kind": "office",
+    "id": "caramoran-hospital",
+    "title": "Caramoran Municipal Hospital",
+    "categoryIds": [
+      "health"
+    ],
+    "page": 3,
+    "phone": "+63 939 891 0368",
+    "email": "cmh_datag@yahoo.com"
+  },
+  {
+    "kind": "office",
+    "id": "ebmc",
+    "title": "Eastern Bicol Medical Center",
+    "categoryIds": [
+      "health"
+    ],
+    "page": 3,
+    "phone": "+63 927 961 5507",
+    "email": "ebmc1718@gmail.com",
+    "aliases": "EBMC hospital"
+  },
+  {
+    "kind": "office",
+    "id": "gigmoto-hospital",
+    "title": "Gigmoto District Hospital",
+    "categoryIds": [
+      "health"
+    ],
+    "page": 3,
+    "phone": "+63 967 247 0696",
+    "email": "gigmotodistricthospital@yahoo.com"
+  },
+  {
+    "kind": "office",
+    "id": "juan-alberto-hospital",
+    "title": "Juan M. Alberto Memorial District Hospital",
+    "categoryIds": [
+      "health"
+    ],
+    "page": 3,
+    "phone": "+63 950 175 7436",
+    "email": "jmamdistricthospital@gmail.com"
+  },
+  {
+    "kind": "office",
+    "id": "pandan-hospital",
+    "title": "Pandan District Hospital",
+    "categoryIds": [
+      "health"
+    ],
+    "page": 3,
+    "phone": "+63 948 940 0932",
+    "email": "pdhthehealer@yahoo.com.ph"
+  },
+  {
+    "kind": "office",
+    "id": "viga-hospital",
+    "title": "Viga District Hospital",
+    "categoryIds": [
+      "health"
+    ],
+    "page": 3,
+    "phone": "+63 951 211 8584",
+    "email": "vigadistricthospital@yahoo.com"
+  }
+]
